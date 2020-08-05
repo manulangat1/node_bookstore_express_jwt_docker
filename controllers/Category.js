@@ -40,3 +40,26 @@ exports.postCategory = async (req,res,next) => {
         })
     }
 }
+// DELETE /api/categories/:id
+// @desc DELETE a category 
+// @access PUBLIC 
+
+exports.deleteCategory = async (req,res,next) => {
+    try{
+        id = req.params.id 
+        const category = await Category.findById(id)
+        if ( category){
+            await  category.remove()
+            return res.status(404).json({
+                success:true,
+                message:'Deletion Successful'
+            })
+        }
+    } catch (err){
+        console.log(`err:${err}`)
+        return res.status(500).json({
+            success:false,
+            error:'Internal Server Error'  
+        })
+    }
+}
