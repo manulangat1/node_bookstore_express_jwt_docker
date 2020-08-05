@@ -4,11 +4,15 @@ const colors = require('colors')
 const path = require('path')
 const dotenv = require('dotenv')
 
+const connectDB = require('./config/db')
+
 //route imports
 const books = require('./routes/Books')
 
 // config dotenv for use 
 dotenv.config({path:'./config/config.env'})
+
+connectDB()
 app = express()
 
 app.use('/api/v1/books/',books)
