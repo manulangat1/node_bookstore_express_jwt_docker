@@ -8,7 +8,11 @@ const dotenv = require('dotenv')
 dotenv.config({path:'./config/config.env'})
 app = express()
 
-app.route('/', (req,res) => res.send("hello"))
+app.get('/', (req,res) => res.send("hello"))
+
+if (process.env.NODE_ENV === "development"){
+    app.use(morgan('dev'))
+}
 
 //getting the port number 
 const PORT = process.env.PORT
