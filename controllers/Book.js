@@ -27,8 +27,13 @@ exports.getBooks = async (req,res,next) => {
 
 exports.postBook = async (req,res,next) => {
     try{
-        const { title,yom,author,price } = req.body
-        const book = await Book.create(req.body)
+        const { title,yom,author,price,category } = req.body
+        const book = await Book.create({ title,yom,author,price })
+        if (category.length > 0){
+            console.log("hey")
+            await book.categories.push(category)
+        }
+        console.log(book)
         return res.status(201).json({
             success:true,
             // count:book.length,
