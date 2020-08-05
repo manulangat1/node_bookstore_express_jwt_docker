@@ -6,7 +6,7 @@ const Book = require('../models/Book')
 exports.getBooks = async (req,res,next) => {
     try{
         const books = await Book.find()
-        console.log(books)
+        // console.log(books)
         return res.status(200).json({
             success:true,
             count:books.length,
