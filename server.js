@@ -14,12 +14,16 @@ dotenv.config({path:'./config/config.env'})
 
 connectDB()
 app = express()
-
-app.use('/api/v1/books/',books)
-
+// morgan logger
 if (process.env.NODE_ENV === "development"){
     app.use(morgan('dev'))
 }
+
+// body parser
+app.use(express.json())
+app.use('/api/v1/books/',books)
+
+
 
 //getting the port number 
 const PORT = process.env.PORT
