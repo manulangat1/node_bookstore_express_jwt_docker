@@ -20,3 +20,5 @@ const BookSchema = new mongoose.Schema({
     }
 
 })
+
+module.exports = BookSchema
