@@ -8,7 +8,7 @@ const connectDB = require('./config/db')
 
 //route imports
 const books = require('./routes/Books')
-
+const Category = require('./routes/Category')
 // config dotenv for use 
 dotenv.config({path:'./config/config.env'})
 
@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === "development"){
 // body parser
 app.use(express.json())
 app.use('/api/v1/books/',books)
+app.use('/api/v1/categories/',Category)
 
 
 
