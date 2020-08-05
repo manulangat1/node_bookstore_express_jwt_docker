@@ -17,7 +17,13 @@ const BookSchema = new mongoose.Schema({
     price:{
         type:Number,
         required:[true,'Kindly input the price']
-    }
+    },
+    categories: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Category"
+        }
+      ]
 
 })
 
