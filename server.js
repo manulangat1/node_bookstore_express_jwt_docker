@@ -4,11 +4,14 @@ const colors = require('colors')
 const path = require('path')
 const dotenv = require('dotenv')
 
+//route imports
+const books = require('./routes/Books')
+
 // config dotenv for use 
 dotenv.config({path:'./config/config.env'})
 app = express()
 
-app.get('/', (req,res) => res.send("hello"))
+app.use('/api/v1/books/',books)
 
 if (process.env.NODE_ENV === "development"){
     app.use(morgan('dev'))
