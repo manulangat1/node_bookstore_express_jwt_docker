@@ -1,5 +1,5 @@
 const Book = require('../models/Book')
-const mailTransport   = require('../emails/SendToMe')
+const {sendmail}   = require('../emails/SendToMe')
 
 // /api/v1/books/
 // @desc GET All Books 
@@ -12,10 +12,10 @@ exports.getBooks = async (req,res,next) => {
             from:process.env.EMAIl,
             to:"langatfarmer@gmail.com",
             subject:"hey you",
-            text:"body"
+            text:"These are your books"
         }
-        mailTransport
-        // sends
+        // mailTransport
+        await sendmail(mail)
         return res.status(200).json({
             success:true,
             count:books.length,
