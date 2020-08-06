@@ -4,9 +4,11 @@ exports.registerUser = async(req,res,next) => {
     try{ 
         const { username,password,email,isAdmin } = req.body 
         const user = await User.create(req.body)
+        const token = await user.generateAuthToken()
         return res.status(201).json({
             success:true,
-            data:user
+            data:user,
+            token
         })
     } catch(err){
         console.log(`err:${err}`)
@@ -19,17 +21,20 @@ exports.registerUser = async(req,res,next) => {
 
 exports.loginUser = async (req,res,next) => {
     try{
-        const { username,password } = req.body 
-        const user = await User.findOne({
-            username:username,
-            password:password
-        })
-        if (user){
+        console.log(`${req.body.email},${req.body.password}`)
+        const { email,password } = req.body 
+        const user = await User.findByCredentials(email, password)
+        // const user = await User.findByCredentials(
+        //     email,
+        //     password
+        // )
+        console.log(`user:${user}`)
+        const token = await user.generateAuthToken()
             return res.status(200).json({
                 success:true,
-                data:user
+                data:user,
+                token
             })
-        }
     } catch (err){
         console.log(`err:${err}`)
         return res.status(500).json({
