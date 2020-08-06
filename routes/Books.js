@@ -1,8 +1,9 @@
 const express = require('express')
 const { getBooks , postBook , deleteBook} = require('../controllers/Book')
+const auth = require('../middleware/isAuth')
 const router = express.Router()
 
-router.route('/').get(getBooks).post(postBook)
-router.route('/:id').delete(deleteBook)
+router.route('/').get(auth,getBooks).post(auth,postBook)
+router.route('/:id').delete(auth,deleteBook)
 
 module.exports = router
