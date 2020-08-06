@@ -1,5 +1,9 @@
 const User = require('../models/User')
 
+//  POST /auth/v1/register/
+// @desc POST 
+// @access PUBLIC
+
 exports.registerUser = async(req,res,next) => {
     try{ 
         const { username,password,email,isAdmin } = req.body 
@@ -18,6 +22,10 @@ exports.registerUser = async(req,res,next) => {
         })
     }
 }
+
+//  POST /auth/v1/login/
+// @desc POST 
+// @access PUBLIC
 
 exports.loginUser = async (req,res,next) => {
     try{
@@ -42,4 +50,12 @@ exports.loginUser = async (req,res,next) => {
             error:'Internal Server Error'
         })
     }
+}
+// GET /auth/v1/userme/
+// @desc POST 
+// @access PRIVATE
+exports.getUser = async (req,res,next) => {
+    res.status(200).json({
+        user:req.user
+    })
 }
