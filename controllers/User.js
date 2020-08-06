@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const auth = require('../middleware/isAuth')
 
 //  POST /auth/v1/register/
 // @desc POST 
@@ -54,8 +55,18 @@ exports.loginUser = async (req,res,next) => {
 // GET /auth/v1/userme/
 // @desc POST 
 // @access PRIVATE
-exports.getUser = async (req,res,next) => {
-    res.status(200).json({
-        user:req.user
-    })
+exports.getUser =  async (req,res,next) => {
+    try{
+        // console.log(req.token)
+        res.status(200).json({
+            message:"Hey",
+            user:req.user,
+            token:req.token
+        })
+    }
+    catch (err){
+        res.status(401).json({
+            error:"Unauthorised"
+        })
+    }
 }
