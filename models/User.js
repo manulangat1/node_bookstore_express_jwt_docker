@@ -14,5 +14,10 @@ const UserSchema = new mongoose.Schema({
         required:[true,"Kindly input email"],
         unique:[true,"Email already in use"]
     },
+    isAdmin:{
+        type:Boolean,
+        required:[true,"Please input isAdmin"],
+        default:false
+    }
 })
 module.exports = new mongoose.model('User',UserSchema)
