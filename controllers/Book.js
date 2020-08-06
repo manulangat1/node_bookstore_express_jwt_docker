@@ -1,6 +1,6 @@
 const Book = require('../models/Book')
 const {sendmail}   = require('../emails/SendToMe')
-
+const { sendMailAsync} = require('../utils')
 // /api/v1/books/
 // @desc GET All Books 
 // @access PUBLIC
@@ -15,6 +15,9 @@ exports.getBooks = async (req,res,next) => {
             text:"These are your books"
         }
         // mailTransport
+        // await sendmail(mail)
+        // const mails = sendMailAsync(mail)
+        // await sendMailAsync(mail)
         await sendmail(mail)
         return res.status(200).json({
             success:true,
