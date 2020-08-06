@@ -2,7 +2,6 @@ const nodemailer = require('nodemailer')
 const dotenv = require('dotenv')
 // config dotenv for use 
 dotenv.config({path:'./config/config.env'})
-console.log(process.env.EMAIL)
 exports.sendmail = async (mail) => {
     const transport = {
         // all the config to make a site send an email
@@ -32,8 +31,7 @@ exports.sendmail = async (mail) => {
         subject:`${mail.subject}`,
         text:`${mail.text}`
     }
-
-
+    // console.log(mails)
     return await transporter.sendMail(mails,(err,data) => {
         if(err){
             console.error(err)
