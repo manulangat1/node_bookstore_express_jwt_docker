@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 // config dotenv for use 
 dotenv.config({path:'./config/config.env'})
 console.log(process.env.EMAIL)
-exports.sendmail = (mail) => {
+exports.sendmail = async (mail) => {
     const transport = {
         // all the config to make a site send an email
         service:'gmail',
@@ -17,8 +17,8 @@ exports.sendmail = (mail) => {
         }
     }
     //transporter function 
-    const transporter = nodemailer.createTransport(transport)
-    transporter.verify((error,success) => {
+    const transporter = await nodemailer.createTransport(transport)
+    await transporter.verify((error,success) => {
         if(error){
             console.error(error)
         } else{
@@ -34,7 +34,7 @@ exports.sendmail = (mail) => {
     }
 
 
-    return transporter.sendMail(mails,(err,data) => {
+    return await transporter.sendMail(mails,(err,data) => {
         if(err){
             console.error(err)
         } else{
